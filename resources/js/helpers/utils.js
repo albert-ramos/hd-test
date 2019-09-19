@@ -6,7 +6,7 @@ const UtilsHelper = {
 
         getLocalToken() {
             let authToken = localStorage.getItem('atkn')
-            return (authToken) ? true : false
+            return (authToken) ? authToken : false
         },
 
         setLocalToken(token) {

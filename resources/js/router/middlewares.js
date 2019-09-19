@@ -14,18 +14,10 @@ export function isUserLogIn(to, from, next) {
 
 export function injectAuthToken(to, from, next) {
     const isLogged = UtilsHelper.session.checkUserIsLoggedIn()
-
-    // if( !isLogged )
-    //     next({name: 'Login'})
-
     let authToken = UtilsHelper.session.getLocalToken();
     
     window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-    if (authToken) {
-        window.axios.defaults.headers.common['_token'] = authToken;
-    } else {
-        console.log("NOT TOKEN FOUND");
-    }
+    if (authToken) window.axios.defaults.headers.common['_token'] = authToken;
 
     next()
 }

@@ -1,6 +1,15 @@
 <template>
     <div class="container">
-        <h2>Admin Home</h2>
+        <widget-list></widget-list>
     </div>
 </template>
 
+<script>
+    import WidgetList from '../components/WidgetList'
+
+    export default {
+        components: {
+            WidgetList
+        }
+    }
+</script>
