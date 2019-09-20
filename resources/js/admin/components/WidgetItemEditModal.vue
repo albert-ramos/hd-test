@@ -79,6 +79,10 @@
                 })
                 .then(({data}) => {
                     this.emitSaveEvent()
+                    this.closeModal()
+                })
+                .catch(({e}) => {
+                    console.log(e)
                 });
                 
             },

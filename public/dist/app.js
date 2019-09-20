@@ -18439,6 +18439,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var data = _ref.data;
 
                 _this.emitSaveEvent();
+                _this.closeModal();
+            }).catch(function (_ref2) {
+                var e = _ref2.e;
+
+                console.log(e);
             });
         },
         emitSaveEvent: function emitSaveEvent() {
