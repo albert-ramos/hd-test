@@ -13,7 +13,7 @@ class JwtMiddleware
     public function handle($request, Closure $next, $guard = null)
     {
         // TODO: REFACTOR
-        $token = $request->get('token');
+        $token = $request->header('_token');
         
         if(!$token) {
             // Unauthorized response if token not there

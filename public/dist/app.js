@@ -16606,18 +16606,10 @@ function isUserLogIn(to, from, next) {
 
 function injectAuthToken(to, from, next) {
     var isLogged = __WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* default */].session.checkUserIsLoggedIn();
-
-    // if( !isLogged )
-    //     next({name: 'Login'})
-
     var authToken = __WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* default */].session.getLocalToken();
 
     window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-    if (authToken) {
-        window.axios.defaults.headers.common['_token'] = authToken;
-    } else {
-        console.log("NOT TOKEN FOUND");
-    }
+    if (authToken) window.axios.defaults.headers.common['_token'] = authToken;
 
     next();
 }
@@ -16643,7 +16635,7 @@ var UtilsHelper = {
         },
         getLocalToken: function getLocalToken() {
             var authToken = localStorage.getItem('atkn');
-            return authToken ? true : false;
+            return authToken ? authToken : false;
         },
         setLocalToken: function setLocalToken(token) {
             localStorage.setItem('atkn', token);
@@ -17450,7 +17442,7 @@ module.exports = function spread(callback) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(45)
 /* template */
 var __vue_template__ = __webpack_require__(46)
 /* template functional */
@@ -17491,7 +17483,29 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 45 */,
+/* 45 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_WidgetList__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_WidgetList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_WidgetList__);
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        WidgetList: __WEBPACK_IMPORTED_MODULE_0__components_WidgetList___default.a
+    }
+});
+
+/***/ }),
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17499,18 +17513,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [_c("widget-list")], 1)
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h2", [_vm._v("Admin Home")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -17997,6 +18002,122 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-08efd545", module.exports)
+  }
+}
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(65)
+/* template */
+var __vue_template__ = __webpack_require__(66)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/admin/components/WidgetList.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-264b7e6d", Component.options)
+  } else {
+    hotAPI.reload("data-v-264b7e6d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 65 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_utils__ = __webpack_require__(26);
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            widgets: []
+        };
+    },
+
+    computed: {},
+
+    methods: {
+        getWidgets: function getWidgets(e) {
+            var _this = this;
+
+            axios.get('/api/v1/widgets', {}).then(function (_ref) {
+                var data = _ref.data;
+
+                _this.widgets = data.data.widgets;
+            });
+        }
+    },
+
+    created: function created() {
+        this.getWidgets();
+    }
+});
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "widget-list" } },
+    _vm._l(_vm.widgets, function(widget) {
+      return _c("p", [_vm._v(_vm._s(widget.title))])
+    }),
+    0
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-264b7e6d", module.exports)
   }
 }
 
