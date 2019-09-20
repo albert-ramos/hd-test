@@ -52,7 +52,11 @@
 
             formValid() {
                 return this.title.length > 0 && this.content.length > 0;
-            }
+            },
+
+            isUpdatingOrCreating() {
+                return ( this.id ) ? 'updating' : 'creating'
+            },
         },
 
         methods: {
@@ -74,13 +78,28 @@
                     template: this.template,
                 })
                 .then(({data}) => {
-                            
+                    this.emitSaveEvent()
                 });
                 
             },
 
+            emitSaveEvent() {
+                let data = {
+                    id: this.id,
+                    title: this.title,
+                    content: this.content
+                }
+
+                if(this.isUpdatingOrCreating == 'updating')
+                    this.$root.$emit('widgetUpdated', data)
+                else
+                    this.$root.$emit('widgetCreated', data)
+            },
+
             getSaveEndpoint() {
-                return ( !this.id ) ? this.createEndpoint : this.updateEndpoint
+                return ( this.isUpdatingOrCreating == 'updating') ? 
+                    this.updateEndpoint : 
+                    this.createEndpoint 
             }
 
         },

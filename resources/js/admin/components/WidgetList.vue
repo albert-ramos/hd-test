@@ -15,11 +15,13 @@
         components: {
             WidgetItem,
         },
+        
          data() {
             return {
                 widgets: []
             }
         },
+
         computed: {},
 
         methods: {
@@ -31,8 +33,12 @@
             },
         },
 
-        created() {
+        mounted() {
             this.getWidgets();
+        },
+
+        created() {
+            
         }
     }
 </script>

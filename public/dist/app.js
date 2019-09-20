@@ -18091,11 +18091,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         WidgetItem: __WEBPACK_IMPORTED_MODULE_1__WidgetItem___default.a
     },
+
     data: function data() {
         return {
             widgets: []
         };
     },
+
 
     computed: {},
 
@@ -18111,9 +18113,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
 
-    created: function created() {
+    mounted: function mounted() {
         this.getWidgets();
-    }
+    },
+    created: function created() {}
 });
 
 /***/ }),
@@ -18239,13 +18242,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         openForm: function openForm() {
             this.$root.$emit('openWidgetForm', this.$attrs.data);
         },
-        parseWidgetData: function parseWidgetData() {
-            __WEBPACK_IMPORTED_MODULE_2__helpers_utils__["a" /* default */].processData.pushDynamicProperties(this, this.$attrs.data);
+        parseWidgetData: function parseWidgetData(externalData) {
+            var data = {};
+
+            if (!externalData) data = this.$attrs.data;else data = externalData;
+
+            __WEBPACK_IMPORTED_MODULE_2__helpers_utils__["a" /* default */].processData.pushDynamicProperties(this, data);
+        },
+        setListeners: function setListeners() {
+            var self = this;
+
+            this.$root.$on('widgetCreated', function (data) {
+                self.onWidgetCreated(data);
+            });
+
+            this.$root.$on('widgetUpdated', function (data) {
+                self.onWidgetUpdated(data);
+            });
+        },
+        onWidgetCreated: function onWidgetCreated(data) {
+            this.setProperties(data);
+        },
+        onWidgetUpdated: function onWidgetUpdated(data) {
+            // THAT'S NOT OK, TEMPORARY FIX
+            if (data.id != this.id) return false;
+
+            this.setProperties(data);
+        },
+        setProperties: function setProperties(data) {
+            this.parseWidgetData(data);
         }
     },
 
     mounted: function mounted() {
         this.parseWidgetData();
+        this.setListeners();
     },
     created: function created() {}
 });
@@ -18381,6 +18412,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         formValid: function formValid() {
             return this.title.length > 0 && this.content.length > 0;
+        },
+        isUpdatingOrCreating: function isUpdatingOrCreating() {
+            return this.id ? 'updating' : 'creating';
         }
     },
 
@@ -18392,6 +18426,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.extraClasses = '';
         },
         postWidget: function postWidget(e) {
+            var _this = this;
+
             e.preventDefault();
 
             axios.post(this.getSaveEndpoint(), {
@@ -18401,10 +18437,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 template: this.template
             }).then(function (_ref) {
                 var data = _ref.data;
+
+                _this.emitSaveEvent();
             });
         },
+        emitSaveEvent: function emitSaveEvent() {
+            var data = {
+                id: this.id,
+                title: this.title,
+                content: this.content
+            };
+
+            if (this.isUpdatingOrCreating == 'updating') this.$root.$emit('widgetUpdated', data);else this.$root.$emit('widgetCreated', data);
+        },
         getSaveEndpoint: function getSaveEndpoint() {
-            return !this.id ? this.createEndpoint : this.updateEndpoint;
+            return this.isUpdatingOrCreating == 'updating' ? this.updateEndpoint : this.createEndpoint;
         }
     },
 
