@@ -9,6 +9,7 @@
 <script>
     import UtilsHelper from '../../helpers/utils'
     import WidgetItem from './WidgetItem'
+    
 
     export default {
         components: {

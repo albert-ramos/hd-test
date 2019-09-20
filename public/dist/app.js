@@ -18236,11 +18236,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        postUpdate: function postUpdate(e) {
-            axios.get(this.updateEndpoint, {}).then(function (_ref) {
-                var data = _ref.data;
-            });
-        },
         openForm: function openForm() {
             this.$root.$emit('openWidgetForm', this.$attrs.data);
         },
@@ -18397,9 +18392,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.extraClasses = '';
         },
         postWidget: function postWidget(e) {
-            // e.preventDefault();
-            console.log("ehhee", this.getSaveEndpoint());
-            // return false;
+            e.preventDefault();
+
+            axios.post(this.getSaveEndpoint(), {
+                title: this.title,
+                content: this.content,
+                background_color: this.background_color,
+                template: this.template
+            }).then(function (_ref) {
+                var data = _ref.data;
+            });
         },
         getSaveEndpoint: function getSaveEndpoint() {
             return !this.id ? this.createEndpoint : this.updateEndpoint;
@@ -18488,6 +18490,64 @@ var render = function() {
                   return
                 }
                 _vm.content = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "backgroundInput" } }, [
+            _vm._v("Background color")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.background_color,
+                expression: "background_color"
+              }
+            ],
+            attrs: {
+              type: "text",
+              placeholder: "Background color",
+              id: "backgroundInput",
+              name: "background_color"
+            },
+            domProps: { value: _vm.background_color },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.background_color = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "templateInput" } }, [_vm._v("Content")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.template,
+                expression: "template"
+              }
+            ],
+            attrs: {
+              type: "text",
+              placeholder: "Template",
+              id: "templateInput",
+              name: "template"
+            },
+            domProps: { value: _vm.template },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.template = $event.target.value
               }
             }
           }),

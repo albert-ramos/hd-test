@@ -30,13 +30,6 @@
         },
 
         methods: {
-            postUpdate(e) {    
-                axios.get(this.updateEndpoint, {})
-                .then(({data}) => {
-
-                });
-            },
-
             openForm() {
                 this.$root.$emit('openWidgetForm', this.$attrs.data);
             },

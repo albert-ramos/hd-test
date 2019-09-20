@@ -1,31 +1,30 @@
 <template>
     <div class="widget-item-edit modal" v-bind:class="extraClasses">
-    <span class="close" @click="closeModal">&times;</span>
+        <span class="close" @click="closeModal">&times;</span>
         
-        <!-- <div id="widgetModal">  -->
-            <!-- data-iziModal-fullscreen="true"  data-iziModal-title="Welcome"  data-iziModal-subtitle="Subtitle"  data-iziModal-icon="icon-home" -->
-            <!-- Modal content -->
-            
-            <form>
-                <fieldset>
-                    <label for="titleInput">Title</label>
-                    <input type="text" v-model="title" placeholder="title" id="titleInput" name="title">
-                    
-                    <label for="contentInput">Content</label>
-                    <input type="text" v-model="content" placeholder="Content" id="contentInput" name="content">
+        <form>
+            <fieldset>
+                <label for="titleInput">Title</label>
+                <input type="text" v-model="title" placeholder="title" id="titleInput" name="title">
+                
+                <label for="contentInput">Content</label>
+                <input type="text" v-model="content" placeholder="Content" id="contentInput" name="content">
 
-                    <button @click="postWidget" class="button-primary" :disabled="!formValid">Save</button>
-                </fieldset>
-            </form>
+                <label for="backgroundInput">Background color</label>
+                <input type="text" v-model="background_color" placeholder="Background color" id="backgroundInput" name="background_color">
 
-        </div>
+                <label for="templateInput">Content</label>
+                <input type="text" v-model="template" placeholder="Template" id="templateInput" name="template">
 
-    <!-- </div> -->
+                <button @click="postWidget" class="button-primary" :disabled="!formValid">Save</button>
+            </fieldset>
+        </form>
+
+    </div>
 </template>
 
 <script>
     import UtilsHelper from '../../helpers/utils'
-    
 
     export default {
         components: {
@@ -66,9 +65,17 @@
             },
 
             postWidget(e) {
-                // e.preventDefault();
-                console.log("ehhee" ,this.getSaveEndpoint());
-                // return false;
+                e.preventDefault();
+                
+                axios.post(this.getSaveEndpoint(), {
+                    title: this.title,
+                    content: this.content,
+                    background_color: this.background_color,
+                    template: this.template,
+                })
+                .then(({data}) => {
+                            
+                });
                 
             },
 
