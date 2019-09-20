@@ -1,19 +1,25 @@
 <template>
     <div id="widget-list">
-        <p v-for="widget in widgets">{{widget.title}}</p>
+        <widget-item v-for="widget in widgets" 
+                    v-bind:data="widget"
+                    v-bind:key="widget.id">></widget-item>
     </div>
 </template>
 
 <script>
     import UtilsHelper from '../../helpers/utils'
+    import WidgetItem from './WidgetItem'
 
     export default {
+        components: {
+            WidgetItem,
+        },
          data() {
             return {
                 widgets: []
             }
         },
-         computed: {},
+        computed: {},
 
         methods: {
             getWidgets(e) {            

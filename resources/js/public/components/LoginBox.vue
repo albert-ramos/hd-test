@@ -8,7 +8,7 @@
                 <label for="passwdInput">Password</label>
                 <input type="password" v-model="passwd" placeholder="Password" id="passwdInput" name="passwd">
 
-                <input @click="postLogin" class="button-primary" type="submit" value="Login">
+                <input @click="postLogin" class="button-primary" type="submit" value="Login" :disabled="!formValid">
             </fieldset>
         </form>
     </div>
@@ -25,8 +25,8 @@
             }
         },
          computed: {
-            isInputEmpty() {
-                return this.mail.length > 0;
+            formValid() {
+                return (this.mail.length > 0 && this.passwd.length > 0);
             }
         },
 

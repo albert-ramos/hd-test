@@ -12,6 +12,14 @@ const UtilsHelper = {
         setLocalToken(token) {
             localStorage.setItem('atkn', token)
         }
+    },
+
+    processData: {
+        pushDynamicProperties(component, data) {
+            for(let i in data) {
+                component[i] = data[i]
+            }
+        },
     }
 }
 
