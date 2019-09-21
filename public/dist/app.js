@@ -18644,6 +18644,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         getSaveEndpoint: function getSaveEndpoint() {
             return this.isUpdatingOrCreating == 'updating' ? this.updateEndpoint : this.createEndpoint;
+        },
+        setShortcuts: function setShortcuts() {
+            var self = this;
+
+            document.addEventListener('keyup', function (evt) {
+                if (evt.keyCode === 27) self.closeModal();
+            });
         }
     },
 
@@ -18651,6 +18658,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         var self = this;
         this.parseWidgetData();
+        this.setShortcuts();
 
         this.$root.$on('openWidgetForm', function (data) {
             self.parseWidgetData(data);

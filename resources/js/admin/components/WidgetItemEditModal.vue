@@ -116,8 +116,15 @@
                 return ( this.isUpdatingOrCreating == 'updating') ? 
                     this.updateEndpoint : 
                     this.createEndpoint 
-            }
+            },
 
+            setShortcuts() {
+                let self = this;
+                
+                document.addEventListener('keyup', function (evt) {
+                    if (evt.keyCode === 27) self.closeModal()
+                });
+            }
         },
 
         mounted() { 
@@ -126,11 +133,13 @@
         created() {
             let self = this
             this.parseWidgetData()
+            this.setShortcuts();
             
             this.$root.$on('openWidgetForm', function(data) {
                 self.parseWidgetData(data);
                 self.extraClasses = "modal-active"
             })
+
         }
     }
 </script>
