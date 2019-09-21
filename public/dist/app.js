@@ -18220,8 +18220,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -18270,6 +18268,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
                 return item.id;
             }).indexOf(widget.id);
             this.widgets.splice(i, 1);
+        },
+        onWidgetUpdated: function onWidgetUpdated(widget) {
+            this.$forceUpdate();
         }
     },
 
@@ -18289,6 +18290,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
         this.$root.$on('widgetDeleted', function (data) {
             self.onWidgetDeleted(data);
+        });
+
+        this.$root.$on('widgetUpdated', function (data) {
+            self.onWidgetUpdated(data);
         });
     },
     created: function created() {}
@@ -18317,8 +18322,6 @@ var render = function() {
       return _c("widget-item", {
         directives: [{ name: "masonry-tile", rawName: "v-masonry-tile" }],
         key: widget.id,
-        staticClass: "widget-item",
-        class: "tpl__" + widget.template,
         attrs: { data: widget }
       })
     }),
@@ -18442,6 +18445,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         deleteEndpoint: function deleteEndpoint() {
             return '/api/v1/widgets/' + this.id + '/delete';
+        },
+        templateClass: function templateClass() {
+            return 'tpl__' + this.template;
         }
     },
 
@@ -18468,6 +18474,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!externalData) data = this.$attrs.data;else data = externalData;
 
             __WEBPACK_IMPORTED_MODULE_2__helpers_utils__["a" /* default */].processData.pushDynamicProperties(this, data);
+
+            // this.$parent.
         },
         setListeners: function setListeners() {
             var self = this;
@@ -18502,7 +18510,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "widget-item", class: _vm.templateClass }, [
     _c("div", { staticClass: "widget-item-container" }, [
       _c("div", { staticClass: "widget-item-content" }, [
         _c("div", { staticClass: "row" }, [

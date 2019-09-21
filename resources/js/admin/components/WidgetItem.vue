@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div  class="widget-item" v-bind:class="templateClass">
         <div class="widget-item-container">
             
             <div class="widget-item-content">
@@ -47,6 +47,9 @@
 
             deleteEndpoint() {
                 return `/api/v1/widgets/${this.id}/delete`
+            },
+            templateClass() {
+                return `tpl__${this.template}`
             }
         },
 
@@ -76,6 +79,8 @@
                     data = externalData
                     
                 UtilsHelper.processData.pushDynamicProperties(this, data);
+
+                // this.$parent.
             },
 
             setListeners() {

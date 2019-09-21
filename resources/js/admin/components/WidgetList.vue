@@ -6,8 +6,6 @@
         <widget-item v-for="(widget) in widgets" 
                     v-bind:data="widget"
                     :key="widget.id"
-                    class="widget-item"
-                    v-bind:class="`tpl__${widget.template}`"
                     v-masonry-tile
                     ></widget-item>
     </div>
@@ -64,6 +62,10 @@
                 let i = this.widgets.map(item => item.id).indexOf(widget.id)
                 this.widgets.splice(i, 1);
             },
+
+            onWidgetUpdated(widget) {
+                this.$forceUpdate();
+            },
         },
 
         mounted() {
@@ -82,6 +84,10 @@
 
             this.$root.$on('widgetDeleted', function(data) {
                 self.onWidgetDeleted(data)
+            })
+
+            this.$root.$on('widgetUpdated', function(data) {
+                self.onWidgetUpdated(data)
             })
         },
 
