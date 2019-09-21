@@ -701,6 +701,10 @@ img {
   margin: 5px;
 }
 
+.widget-grid .widget-item .widget-item-container {
+  height: 100%;
+}
+
 .widget-grid .widget-item.tpl__small {
   width: 20%;
   height: 200px;

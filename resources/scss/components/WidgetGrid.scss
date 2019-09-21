@@ -1,6 +1,10 @@
 .widget-grid {
     .widget-item {
         margin: 5px;
+
+        .widget-item-container {
+            height: 100%;
+        }
         
         &.tpl{
                 &__small {

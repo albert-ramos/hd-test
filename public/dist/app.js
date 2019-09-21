@@ -18463,11 +18463,15 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "widget-item-container" }, [
-      _c("div", { staticClass: "widget-item-content" }, [
-        _c("p", { on: { click: _vm.openForm } }, [_vm._v(_vm._s(_vm.title))])
-      ])
-    ])
+    _c(
+      "div",
+      { staticClass: "widget-item-container", on: { click: _vm.openForm } },
+      [
+        _c("div", { staticClass: "widget-item-content" }, [
+          _c("p", [_vm._v(_vm._s(_vm.title))])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = []

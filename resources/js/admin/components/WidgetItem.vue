@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="widget-item-container">
+        <div @click="openForm" class="widget-item-container">
             
             <div class="widget-item-content">
-                <p @click="openForm">{{title}}</p>
+                <p>{{title}}</p>
             </div>
 
         </div>
