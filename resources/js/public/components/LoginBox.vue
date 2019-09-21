@@ -8,7 +8,7 @@
                 <label for="passwdInput">Password</label>
                 <input type="password" v-model="passwd" placeholder="Password" id="passwdInput" name="passwd">
 
-                <input @click="postLogin" class="button-primary" type="submit" value="Login">
+                <input @click="postLogin" class="button-primary" type="submit" value="Login" :disabled="!formValid">
             </fieldset>
         </form>
     </div>
@@ -25,8 +25,8 @@
             }
         },
          computed: {
-            isInputEmpty() {
-                return this.mail.length > 0;
+            formValid() {
+                return (this.mail.length > 0 && this.passwd.length > 0);
             }
         },
 
@@ -39,8 +39,14 @@
                     passwd: this.passwd
                 })
                 .then(({data}) => {
-                    UtilsHelper.session.setLocalToken(data.data.token);
+                    let user = data.data.user
+                    let token = data.data.token
+
+                    // TODO: Refactor to proceed with one call setter
+                    UtilsHelper.session.setLocalToken(token);
+                    UtilsHelper.session.setUserInfo(user);
                     this.$router.push({name: 'AdminHome'})
+                    this.$root.$emit('loginSuccess', user)
                 });
             },
         }

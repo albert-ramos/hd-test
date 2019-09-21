@@ -55,7 +55,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'iss' => "lumen-jwt",
             'sub' => $this->id,
             'iat' => time(),
-            'exp' => time() + 60*60 // Expiration time
+            'exp' => time() + 60*60*60 // Expiration time
         ];
         
         // As you can see we are passing `JWT_SECRET` as the second parameter that will 

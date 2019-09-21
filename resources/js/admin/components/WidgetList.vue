@@ -1,19 +1,37 @@
 <template>
-    <div id="widget-list">
-        <p v-for="widget in widgets">{{widget.title}}</p>
+    <div id="widget-list" class="widget-grid"
+                    v-masonry
+                    transition-duration="0.3s" item-selector=".widget-item">
+
+        <widget-item v-for="(widget) in widgets" 
+                    v-bind:data="widget"
+                    :key="widget.id"
+                    v-masonry-tile
+                    ></widget-item>
     </div>
 </template>
 
 <script>
+    import Vue from 'vue'
+    import {VueMasonryPlugin} from 'vue-masonry';
+
+    Vue.use(VueMasonryPlugin)
+    
+    import WidgetItem from './WidgetItem'
     import UtilsHelper from '../../helpers/utils'
 
     export default {
+        components: {
+            WidgetItem
+        },
+        
          data() {
             return {
                 widgets: []
             }
         },
-         computed: {},
+
+        computed: {},
 
         methods: {
             getWidgets(e) {            
@@ -22,10 +40,54 @@
                     this.widgets = data.data.widgets
                 });
             },
+
+            setGrid() {
+                let options = {
+                    cellHeight: 80,
+                    verticalMargin: 10
+                }
+            },
+
+            onWidgetCreated(widget) {
+                widget.key = widget.id
+                this.widgets.push(widget)
+            },
+
+            onWidgetDeleted(widget) {
+                let i = this.widgets.map(item => item.id).indexOf(widget.id)
+                this.widgets.splice(i, 1);
+            },
+
+            onWidgetUpdated(widget) {
+                this.$forceUpdate();
+            },
+        },
+
+        mounted() {
+
+            let self = this
+            if (typeof this.$redrawVueMasonry === 'function') {
+                    this.$redrawVueMasonry()
+                }
+                
+            this.getWidgets();
+            this.setGrid();
+
+            this.$root.$on('widgetCreated', function(data) {
+                self.onWidgetCreated(data)
+            })
+
+            this.$root.$on('widgetDeleted', function(data) {
+                self.onWidgetDeleted(data)
+            })
+
+            this.$root.$on('widgetUpdated', function(data) {
+                self.onWidgetUpdated(data)
+            })
         },
 
         created() {
-            this.getWidgets();
+            
         }
     }
 </script>

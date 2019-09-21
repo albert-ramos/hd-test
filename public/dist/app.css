@@ -647,3 +647,127 @@ img {
 .float-right {
   float: right;
 }
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+blockquote {
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  margin: 5px;
+}
+
+.modal {
+  visibility: hidden;
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding: 100px 20%;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+.modal form {
+  padding: 20px;
+  background-color: white;
+}
+
+.modal.modal-active {
+  visibility: visible;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  right: 20px;
+  top: 0;
+  font-size: 4rem;
+  color: white;
+  line-height: 1;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.widget-grid .widget-item {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin: 5px;
+  border: 1px solid #d8d8d8;
+}
+
+.widget-grid .widget-item .widget-item-container {
+  height: 100%;
+  padding: 5px;
+}
+
+.widget-grid .widget-item .widget-item-container .widget-button {
+  display: inline-block;
+  padding: 0 15px;
+  height: auto;
+}
+
+.widget-grid .widget-item .widget-item-container .widget-button.widget-button-fullw {
+  width: 100%;
+}
+
+.widget-grid .widget-item .widget-item-container .widget-button.widget-button-remove {
+  background-color: #c74e4e;
+  border-color: #c74e4e;
+}
+
+.widget-grid .widget-item .widget-item-container .title-container {
+  word-break: break-all;
+}
+
+.widget-grid .widget-item.tpl__small {
+  width: 20%;
+  height: 200px;
+}
+
+.widget-grid .widget-item.tpl__medium {
+  width: 40%;
+  height: 300px;
+}
+
+.widget-grid .widget-item.tpl__large {
+  width: 50%;
+  height: 350px;
+}
+
+.login-box {
+  border: 1px solid #cecece;
+  padding: 20px;
+  margin-top: 10%;
+}

@@ -31,6 +31,7 @@ $router->group([
             $router->get('/', 'API\v1\WidgetController@index');
             $router->post('/store', 'API\v1\WidgetController@store');
             $router->post('/{id}/update', 'API\v1\WidgetController@update');
+            $router->delete('/{id}/delete', 'API\v1\WidgetController@delete');
         
         });
 

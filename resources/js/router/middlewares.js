@@ -17,8 +17,13 @@ export function injectAuthToken(to, from, next) {
     let authToken = UtilsHelper.session.getLocalToken();
     
     window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-    if (authToken) window.axios.defaults.headers.common['_token'] = authToken;
 
+    // TODO: Not working yet
+    if (authToken) {
+        window.axios.defaults.headers.common['_token'] = authToken;
+        
+    }
+    
     next()
 }
 
