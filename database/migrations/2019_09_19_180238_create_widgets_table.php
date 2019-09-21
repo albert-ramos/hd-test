@@ -17,7 +17,7 @@ class CreateWidgetsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('title');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->string('background_color');
             $table->string('template');
             $table->timestamps();

@@ -5,14 +5,11 @@
         <form>
             <fieldset>
                 <label for="titleInput">Title</label>
-                <input type="text" v-model="title" placeholder="title" id="titleInput" name="title">
-                
-                <label for="contentInput">Content</label>
-                <input type="text" v-model="content" placeholder="Content" id="contentInput" name="content">
+                <input type="text" v-model="title" placeholder="Title" id="titleInput" name="title">
 
                 <label for="backgroundInput">Background color</label>
                 <input type="text" v-model="background_color" placeholder="Background color" id="backgroundInput" name="background_color">
-
+                
                 <label for="templateInput">Template</label>
                 <select v-model="template" id="templateInput" name="template">
                     <option value="small" selected="selected">Small</option>
@@ -38,9 +35,8 @@
             return {                
                 id: '',
                 title: '',
-                content: '',
                 template: 'small',
-                background_color: '',
+                background_color: "#f1f1f1",
                 extraClasses: '',
             }
         },
@@ -55,7 +51,7 @@
             },
 
             formValid() {
-                return this.title.length > 0 && this.content.length > 0;
+                return this.title.length > 0
             },
 
             isUpdatingOrCreating() {
@@ -73,9 +69,8 @@
                 this.parseWidgetData({
                     id: '',
                     title: '',
-                    content: '',
                     template: 'small',
-                    background_color: '',
+                    background_color: "#f1f1f1",
                 })
             },
 

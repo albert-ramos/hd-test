@@ -24,12 +24,9 @@
 
 
                 <div class="row">
-
-
                     <div class="column title-container">
                         <blockquote>{{title}}</blockquote>
                     </div>
-
                 </div>
             </div>
 

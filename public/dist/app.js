@@ -18342,9 +18342,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -18579,9 +18576,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -18591,9 +18585,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             id: '',
             title: '',
-            content: '',
             template: 'small',
-            background_color: '',
+            background_color: "#f1f1f1",
             extraClasses: ''
         };
     },
@@ -18607,7 +18600,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return '/api/v1/widgets/store';
         },
         formValid: function formValid() {
-            return this.title.length > 0 && this.content.length > 0;
+            return this.title.length > 0;
         },
         isUpdatingOrCreating: function isUpdatingOrCreating() {
             return this.id ? 'updating' : 'creating';
@@ -18623,9 +18616,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.parseWidgetData({
                 id: '',
                 title: '',
-                content: '',
                 template: 'small',
-                background_color: ''
+                background_color: "#f1f1f1"
             });
         },
         postWidget: function postWidget(e) {
@@ -18712,7 +18704,7 @@ var render = function() {
             ],
             attrs: {
               type: "text",
-              placeholder: "title",
+              placeholder: "Title",
               id: "titleInput",
               name: "title"
             },
@@ -18723,34 +18715,6 @@ var render = function() {
                   return
                 }
                 _vm.title = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "contentInput" } }, [_vm._v("Content")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.content,
-                expression: "content"
-              }
-            ],
-            attrs: {
-              type: "text",
-              placeholder: "Content",
-              id: "contentInput",
-              name: "content"
-            },
-            domProps: { value: _vm.content },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.content = $event.target.value
               }
             }
           }),

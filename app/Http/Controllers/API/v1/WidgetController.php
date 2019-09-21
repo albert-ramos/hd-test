@@ -13,7 +13,7 @@ class WidgetController extends Controller
 {
 
     protected $defaultTemplate = 'small';
-    protected $defaultBackgroundColor = 'red';
+    protected $defaultBackgroundColor = '#f1f1f1';
 
     public function index(Request $request) {
         $widgets = Widget::where('user_id', $request->auth->id)->get();
@@ -28,15 +28,17 @@ class WidgetController extends Controller
         ], 200);
     }
 
+    // TODO: So much repeated code :/
     public function store(Request $request) {
         $this->validate($request, [
             'title' => 'required',
-            'content' => 'required'
+            'background_color' => 'required',
+            'template' => 'required',
         ]);
 
         $widget = Widget::create([
             'title' => $request->get('title'),
-            'content' => $request->get('content'),
+            'content' => $request->get('content') ?? '',
             'background_color' => $request->get('background_color') ?? $this->defaultBackgroundColor,
             'template' => $request->get('template') ?? $this->defaultTemplate,
             'user_id' => $request->auth->id
@@ -58,7 +60,8 @@ class WidgetController extends Controller
     public function update(Request $request, $id) {
         $this->validate($request, [
             'title' => 'required',
-            'content' => 'required'
+            'background_color' => 'required',
+            'template' => 'required',
         ]);
 
         $widget = Widget::find($id);
@@ -66,7 +69,7 @@ class WidgetController extends Controller
         if($widget) {
             $widget->update([
                 'title' => $request->get('title'),
-                'content' => $request->get('content'),
+                'content' => $request->get('content') ?? '',
                 'background_color' => $request->get('background_color'),
                 'template' => $request->get('template'),
             ]);
