@@ -16616,10 +16616,9 @@ function injectAuthToken(to, from, next) {
 
     window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-    if (authToken) window.axios.defaults.headers.common['_token'] = authToken;else {
-        __WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* default */].session.userTokenExpired();
-        next({ name: 'Login' });
-        return false;
+    // TODO: Not working yet
+    if (authToken) {
+        window.axios.defaults.headers.common['_token'] = authToken;
     }
 
     next();
