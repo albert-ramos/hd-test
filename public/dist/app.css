@@ -721,6 +721,8 @@ blockquote {
 }
 
 .widget-grid .widget-item {
+  overflow-x: hidden;
+  overflow-y: scroll;
   margin: 5px;
   border: 1px solid #d8d8d8;
 }
@@ -745,6 +747,10 @@ blockquote {
   border-color: #c74e4e;
 }
 
+.widget-grid .widget-item .widget-item-container .title-container {
+  word-break: break-all;
+}
+
 .widget-grid .widget-item.tpl__small {
   width: 20%;
   height: 200px;
@@ -758,4 +764,10 @@ blockquote {
 .widget-grid .widget-item.tpl__large {
   width: 50%;
   height: 350px;
+}
+
+.login-box {
+  border: 1px solid #cecece;
+  padding: 20px;
+  margin-top: 10%;
 }

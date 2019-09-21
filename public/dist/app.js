@@ -18464,7 +18464,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "column" }, [
+          _c("div", { staticClass: "column title-container" }, [
             _c("blockquote", [_vm._v(_vm._s(_vm.title))])
           ])
         ])
@@ -21835,7 +21835,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         setUser: function setUser() {
             this.user = __WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* default */].session.getUserInfo();
-            this.userDataReady = true;
+            if (Object.keys(this.user).length) this.userDataReady = true;
         }
     },
 

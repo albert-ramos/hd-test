@@ -45,7 +45,7 @@ export default {
     methods: {
         setUser: function() {
             this.user = UtilsHelper.session.getUserInfo();
-            this.userDataReady = true;
+            if(Object.keys(this.user).length) this.userDataReady = true;
         }
     },
 

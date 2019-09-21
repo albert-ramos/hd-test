@@ -26,7 +26,7 @@
                 <div class="row">
 
 
-                    <div class="column">
+                    <div class="column title-container">
                         <blockquote>{{title}}</blockquote>
                     </div>
 

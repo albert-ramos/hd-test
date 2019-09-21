@@ -1,5 +1,7 @@
 .widget-grid {
     .widget-item {
+        overflow-x: hidden;
+        overflow-y: scroll;
         margin: 5px;
         border: 1px solid #d8d8d8;
 
@@ -20,6 +22,10 @@
                     background-color: #c74e4e;
                     border-color: #c74e4e;
                   }
+            }
+
+            .title-container {
+                word-break: break-all;
             }
         }
         
