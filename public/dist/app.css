@@ -647,6 +647,20 @@ img {
 .float-right {
   float: right;
 }
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+blockquote {
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  margin: 5px;
+}
+
 .modal {
   visibility: hidden;
   position: fixed;
@@ -669,6 +683,11 @@ img {
   /* Black w/ opacity */
 }
 
+.modal form {
+  padding: 20px;
+  background-color: white;
+}
+
 .modal.modal-active {
   visibility: visible;
 }
@@ -684,10 +703,14 @@ img {
 
 /* The Close Button */
 .close {
-  color: #aaaaaa;
-  float: right;
   font-size: 28px;
   font-weight: bold;
+  position: absolute;
+  right: 20px;
+  top: 0;
+  font-size: 4rem;
+  color: white;
+  line-height: 1;
 }
 
 .close:hover,
@@ -699,10 +722,27 @@ img {
 
 .widget-grid .widget-item {
   margin: 5px;
+  border: 1px solid #d8d8d8;
 }
 
 .widget-grid .widget-item .widget-item-container {
   height: 100%;
+  padding: 5px;
+}
+
+.widget-grid .widget-item .widget-item-container .widget-button {
+  display: inline-block;
+  padding: 0 15px;
+  height: auto;
+}
+
+.widget-grid .widget-item .widget-item-container .widget-button.widget-button-fullw {
+  width: 100%;
+}
+
+.widget-grid .widget-item .widget-item-container .widget-button.widget-button-remove {
+  background-color: #c74e4e;
+  border-color: #c74e4e;
 }
 
 .widget-grid .widget-item.tpl__small {

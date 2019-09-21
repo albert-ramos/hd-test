@@ -20,7 +20,7 @@
                     <option value="large">Large</option>
                 </select>
 
-                <button @click="postWidget" class="button-primary" :disabled="!formValid">Save</button>
+                <button @click="postWidget" class="button button-outline" :disabled="!formValid">Save</button>
             </fieldset>
         </form>
 

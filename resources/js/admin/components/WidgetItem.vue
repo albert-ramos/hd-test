@@ -6,17 +6,31 @@
                 
                 <div class="row">
 
-                    <div class="column">
-                        <p class="widget-title">{{title}}</p>
+                    <div class="column text-center">
+                        <button @click="openForm" 
+                            class="widget-edit button widget-button widget-button-fullw">
+                            edit
+                        </button>
                     </div>
 
-                    <div class="column">
-                        <button @click="openForm" class="widget-edit">edit</button>
-                        <button @click="postRemove" class="widget-remove">X</button>
+                    <div class="column text-center">
+                        <button @click="postRemove" 
+                            class="widget-remove button widget-button widget-button-remove widget-button-fullw">
+                            remove
+                        </button>
                     </div>
 
                 </div>
 
+
+                <div class="row">
+
+
+                    <div class="column">
+                        <blockquote>{{title}}</blockquote>
+                    </div>
+
+                </div>
             </div>
 
         </div>

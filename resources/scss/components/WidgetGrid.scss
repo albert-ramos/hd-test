@@ -1,9 +1,26 @@
 .widget-grid {
     .widget-item {
         margin: 5px;
+        border: 1px solid #d8d8d8;
 
         .widget-item-container {
             height: 100%;
+            padding: 5px;
+
+            .widget-button {
+                display: inline-block;
+                padding: 0 15px;
+                height: auto;
+
+                &.widget-button-fullw {
+                    width: 100%;
+                }
+
+                &.widget-button-remove {
+                    background-color: #c74e4e;
+                    border-color: #c74e4e;
+                  }
+            }
         }
         
         &.tpl{
@@ -20,6 +37,7 @@
                     height: 350px;
                 }
             }  
+
     }
 }
 

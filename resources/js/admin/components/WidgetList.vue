@@ -11,11 +11,6 @@
     </div>
 </template>
 
-<style>
-    .widget-item {
-            border: 1px solid;
-    }
-</style>
 <script>
     import Vue from 'vue'
     import {VueMasonryPlugin} from 'vue-masonry';

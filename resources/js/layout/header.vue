@@ -7,11 +7,11 @@
                     Lumen & Vue
                 </div>
 
-                <div class="column">
+                <div class="column text-center">
                     <p v-if="userDataAvailable">Hello {{user.name}}</p>
                 </div>
 
-                <div class="column">
+                <div class="column text-right">
                     <widget-add-item-button v-if="userDataAvailable"></widget-add-item-button>  
                 </div>
             </div>
