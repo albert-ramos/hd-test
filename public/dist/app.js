@@ -18561,6 +18561,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -18571,7 +18575,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             id: '',
             title: '',
             content: '',
-            template: '',
+            template: 'small',
             background_color: '',
             extraClasses: ''
         };
@@ -18599,6 +18603,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         closeModal: function closeModal() {
             this.extraClasses = '';
+            this.parseWidgetData({
+                title: '',
+                content: '',
+                template: '',
+                background_color: ''
+            });
         },
         postWidget: function postWidget(e) {
             var _this = this;
@@ -18625,7 +18635,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var data = {
                 id: this.id,
                 title: this.title,
-                content: this.content
+                content: this.content,
+                background_color: this.background_color,
+                template: this.template
             };
 
             if (this.isUpdatingOrCreating == 'updating') this.$root.$emit('widgetUpdated', data);else this.$root.$emit('widgetCreated', data);
@@ -18751,33 +18763,50 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("label", { attrs: { for: "templateInput" } }, [_vm._v("Content")]),
+          _c("label", { attrs: { for: "templateInput" } }, [
+            _vm._v("Template")
+          ]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.template,
-                expression: "template"
-              }
-            ],
-            attrs: {
-              type: "text",
-              placeholder: "Template",
-              id: "templateInput",
-              name: "template"
-            },
-            domProps: { value: _vm.template },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.template,
+                  expression: "template"
                 }
-                _vm.template = $event.target.value
+              ],
+              attrs: { id: "templateInput", name: "template" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.template = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
               }
-            }
-          }),
+            },
+            [
+              _c(
+                "option",
+                { attrs: { value: "small", selected: "selected" } },
+                [_vm._v("Small")]
+              ),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "medium" } }, [_vm._v("Medium")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "large" } }, [_vm._v("Large")])
+            ]
+          ),
           _vm._v(" "),
           _c(
             "button",

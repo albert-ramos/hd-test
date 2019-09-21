@@ -13,8 +13,12 @@
                 <label for="backgroundInput">Background color</label>
                 <input type="text" v-model="background_color" placeholder="Background color" id="backgroundInput" name="background_color">
 
-                <label for="templateInput">Content</label>
-                <input type="text" v-model="template" placeholder="Template" id="templateInput" name="template">
+                <label for="templateInput">Template</label>
+                <select v-model="template" id="templateInput" name="template">
+                    <option value="small" selected="selected">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
 
                 <button @click="postWidget" class="button-primary" :disabled="!formValid">Save</button>
             </fieldset>
@@ -35,7 +39,7 @@
                 id: '',
                 title: '',
                 content: '',
-                template: '',
+                template: 'small',
                 background_color: '',
                 extraClasses: '',
             }
@@ -66,6 +70,12 @@
 
             closeModal() {
                 this.extraClasses = '';
+                this.parseWidgetData({
+                    title: '',
+                    content: '',
+                    template: '',
+                    background_color: '',
+                })
             },
 
             postWidget(e) {
@@ -91,7 +101,9 @@
                 let data = {
                     id: this.id,
                     title: this.title,
-                    content: this.content
+                    content: this.content,
+                    background_color: this.background_color,
+                    template: this.template
                 }
 
                 if(this.isUpdatingOrCreating == 'updating')
@@ -108,7 +120,8 @@
 
         },
 
-        mounted() { },
+        mounted() { 
+        },
 
         created() {
             let self = this
