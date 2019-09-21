@@ -17,8 +17,14 @@ export function injectAuthToken(to, from, next) {
     let authToken = UtilsHelper.session.getLocalToken();
     
     window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-    if (authToken) window.axios.defaults.headers.common['_token'] = authToken;
 
+    if (authToken) window.axios.defaults.headers.common['_token'] = authToken;
+    else {
+        UtilsHelper.session.userTokenExpired()
+        next({name: 'Login'})
+        return false;
+    }
+    
     next()
 }
 

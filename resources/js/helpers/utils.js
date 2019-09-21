@@ -4,6 +4,11 @@ const UtilsHelper = {
             return this.getLocalToken()
         },
 
+        userTokenExpired() {
+            this.setLocalToken('');
+            this.setUserInfo({});
+        },
+
         // TODO: Encrypt values
         getLocalToken() {
             let authToken = localStorage.getItem('atkn')

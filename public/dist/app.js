@@ -16615,7 +16615,12 @@ function injectAuthToken(to, from, next) {
     var authToken = __WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* default */].session.getLocalToken();
 
     window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-    if (authToken) window.axios.defaults.headers.common['_token'] = authToken;
+
+    if (authToken) window.axios.defaults.headers.common['_token'] = authToken;else {
+        __WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* default */].session.userTokenExpired();
+        next({ name: 'Login' });
+        return false;
+    }
 
     next();
 }
@@ -16638,6 +16643,10 @@ var UtilsHelper = {
     session: {
         checkUserIsLoggedIn: function checkUserIsLoggedIn() {
             return this.getLocalToken();
+        },
+        userTokenExpired: function userTokenExpired() {
+            this.setLocalToken('');
+            this.setUserInfo({});
         },
 
 
