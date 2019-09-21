@@ -18261,12 +18261,20 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
                 verticalMargin: 10
             };
         },
-        onWidgetCreated: function onWidgetCreated(data) {
-            this.widgets.push(data);
+        onWidgetCreated: function onWidgetCreated(widget) {
+            widget.key = widget.id;
+            this.widgets.push(widget);
+        },
+        onWidgetDeleted: function onWidgetDeleted(widget) {
+            var i = this.widgets.map(function (item) {
+                return item.id;
+            }).indexOf(widget.id);
+            this.widgets.splice(i, 1);
         }
     },
 
     mounted: function mounted() {
+
         var self = this;
         if (typeof this.$redrawVueMasonry === 'function') {
             this.$redrawVueMasonry();
@@ -18277,6 +18285,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
         this.$root.$on('widgetCreated', function (data) {
             self.onWidgetCreated(data);
+        });
+
+        this.$root.$on('widgetDeleted', function (data) {
+            self.onWidgetDeleted(data);
         });
     },
     created: function created() {}
@@ -18393,6 +18405,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -18414,10 +18439,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         updateEndpoint: function updateEndpoint() {
             return '/api/v1/widgets/' + this.id + '/update';
+        },
+        deleteEndpoint: function deleteEndpoint() {
+            return '/api/v1/widgets/' + this.id + '/delete';
         }
     },
 
     methods: {
+        postRemove: function postRemove() {
+            var _this = this;
+
+            axios.delete(this.deleteEndpoint, {}).then(function (_ref) {
+                var data = _ref.data;
+
+                _this.$parent.onWidgetDeleted(_this);
+            }).catch(function (_ref2) {
+                var e = _ref2.e;
+
+                console.log(e);
+            });
+        },
         openForm: function openForm() {
             this.$root.$emit('openWidgetForm', this.$attrs.data);
         },
@@ -18462,15 +18503,31 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      { staticClass: "widget-item-container", on: { click: _vm.openForm } },
-      [
-        _c("div", { staticClass: "widget-item-content" }, [
-          _c("p", [_vm._v(_vm._s(_vm.title))])
+    _c("div", { staticClass: "widget-item-container" }, [
+      _c("div", { staticClass: "widget-item-content" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "column" }, [
+            _c("p", { staticClass: "widget-title" }, [
+              _vm._v(_vm._s(_vm.title))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "column" }, [
+            _c(
+              "button",
+              { staticClass: "widget-edit", on: { click: _vm.openForm } },
+              [_vm._v("edit")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "widget-remove", on: { click: _vm.postRemove } },
+              [_vm._v("X")]
+            )
+          ])
         ])
-      ]
-    )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -18607,9 +18664,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         closeModal: function closeModal() {
             this.extraClasses = '';
             this.parseWidgetData({
+                id: '',
                 title: '',
                 content: '',
-                template: '',
+                template: 'small',
                 background_color: ''
             });
         },
@@ -18626,7 +18684,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (_ref) {
                 var data = _ref.data;
 
-                _this.emitSaveEvent();
+                _this.emitSaveEvent(data);
                 _this.closeModal();
             }).catch(function (_ref2) {
                 var e = _ref2.e;
@@ -18634,16 +18692,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(e);
             });
         },
-        emitSaveEvent: function emitSaveEvent() {
-            var data = {
-                id: this.id,
-                title: this.title,
-                content: this.content,
-                background_color: this.background_color,
-                template: this.template
-            };
+        emitSaveEvent: function emitSaveEvent(data) {
+            var widget = data.data.widget;
 
-            if (this.isUpdatingOrCreating == 'updating') this.$root.$emit('widgetUpdated', data);else this.$root.$emit('widgetCreated', data);
+            // console.log(widget)
+
+            if (this.isUpdatingOrCreating == 'updating') this.$root.$emit('widgetUpdated', widget);else this.$root.$emit('widgetCreated', widget);
         },
         getSaveEndpoint: function getSaveEndpoint() {
             return this.isUpdatingOrCreating == 'updating' ? this.updateEndpoint : this.createEndpoint;

@@ -3,9 +3,9 @@
                     v-masonry
                     transition-duration="0.3s" item-selector=".widget-item">
 
-        <widget-item v-for="widget in widgets" 
+        <widget-item v-for="(widget) in widgets" 
                     v-bind:data="widget"
-                    v-bind:key="widget.id"
+                    :key="widget.id"
                     class="widget-item"
                     v-bind:class="`tpl__${widget.template}`"
                     v-masonry-tile
@@ -55,12 +55,19 @@
                 }
             },
 
-            onWidgetCreated(data) {
-                this.widgets.push(data)
+            onWidgetCreated(widget) {
+                widget.key = widget.id
+                this.widgets.push(widget)
+            },
+
+            onWidgetDeleted(widget) {
+                let i = this.widgets.map(item => item.id).indexOf(widget.id)
+                this.widgets.splice(i, 1);
             },
         },
 
         mounted() {
+
             let self = this
             if (typeof this.$redrawVueMasonry === 'function') {
                     this.$redrawVueMasonry()
@@ -71,6 +78,10 @@
 
             this.$root.$on('widgetCreated', function(data) {
                 self.onWidgetCreated(data)
+            })
+
+            this.$root.$on('widgetDeleted', function(data) {
+                self.onWidgetDeleted(data)
             })
         },
 

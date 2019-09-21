@@ -100,5 +100,23 @@ class WidgetController extends Controller
         return response()->json($data['data'], $data['status']);
 
     }
+
+    public function delete(Request $request, $id) {
+        $widget = Widget::find($id);
+        $widget->delete();
+
+        $data = [
+            'data' => [
+                'data' => [
+                    'widget' => $widget,
+                    'message' => 'Widget removed!',
+                ] 
+            ], 
+            'status' => 200
+        ];
+    
+    
+        return response()->json($data['data'], $data['status']);
+    }
     
 }

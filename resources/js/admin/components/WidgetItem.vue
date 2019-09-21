@@ -1,9 +1,22 @@
 <template>
     <div>
-        <div @click="openForm" class="widget-item-container">
+        <div class="widget-item-container">
             
             <div class="widget-item-content">
-                <p>{{title}}</p>
+                
+                <div class="row">
+
+                    <div class="column">
+                        <p class="widget-title">{{title}}</p>
+                    </div>
+
+                    <div class="column">
+                        <button @click="openForm" class="widget-edit">edit</button>
+                        <button @click="postRemove" class="widget-remove">X</button>
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
@@ -30,10 +43,26 @@
         computed: {
             updateEndpoint() {
                 return `/api/v1/widgets/${this.id}/update`
+            },
+
+            deleteEndpoint() {
+                return `/api/v1/widgets/${this.id}/delete`
             }
         },
 
         methods: {
+            postRemove() {
+                axios.delete(this.deleteEndpoint, {})
+                .then(({data}) => {
+                    this.$parent.onWidgetDeleted(this)
+                })
+                .catch(({e}) => {
+                    console.log(e)
+                });
+
+                
+            },
+
             openForm() {
                 this.$root.$emit('openWidgetForm', this.$attrs.data);
             },

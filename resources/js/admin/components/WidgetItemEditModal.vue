@@ -71,9 +71,10 @@
             closeModal() {
                 this.extraClasses = '';
                 this.parseWidgetData({
+                    id: '',
                     title: '',
                     content: '',
-                    template: '',
+                    template: 'small',
                     background_color: '',
                 })
             },
@@ -88,7 +89,7 @@
                     template: this.template,
                 })
                 .then(({data}) => {
-                    this.emitSaveEvent()
+                    this.emitSaveEvent(data)
                     this.closeModal()
                 })
                 .catch(({e}) => {
@@ -97,19 +98,15 @@
                 
             },
 
-            emitSaveEvent() {
-                let data = {
-                    id: this.id,
-                    title: this.title,
-                    content: this.content,
-                    background_color: this.background_color,
-                    template: this.template
-                }
+            emitSaveEvent(data) {
+                let widget = data.data.widget;
+
+                // console.log(widget)
 
                 if(this.isUpdatingOrCreating == 'updating')
-                    this.$root.$emit('widgetUpdated', data)
+                    this.$root.$emit('widgetUpdated', widget)
                 else
-                    this.$root.$emit('widgetCreated', data)
+                    this.$root.$emit('widgetCreated', widget)
             },
 
             getSaveEndpoint() {
