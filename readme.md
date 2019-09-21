@@ -5,13 +5,19 @@ Login and dashboard example with JWT token and REST api.
 ## INSTALLATION
 
 Download repository
-```git clone https://github.com/albert-ramos/hd-test.git```
+```
+git clone https://github.com/albert-ramos/hd-test.git
+```
 
 Download dependencies
-```composer install && npm install```
+```
+composer install && npm install
+```
 
 Run migrations
-```php artisan migrate:refresh --seed```
+```
+php artisan migrate:refresh --seed
+```
 
 Start server
 ```php
@@ -19,7 +25,9 @@ php -S localhost:8000 -t public
 ```
 
 Build assets
-```npm run prod```
+```
+npm run prod
+```
 
 Go to your browser and visit
 http://localhost:8000
@@ -31,8 +39,8 @@ http://localhost:8000
 - Unit testing
 - Add color picker
 - Refactor session object.
-- Use MongoDB not MySQL
-- Create register component
+- **Use MongoDB not MySQL**
+- **Create register page**
 - Encrypt user data saved on local storage.
 - Handle status codes 401, 403, auto logout on session expired.
 
