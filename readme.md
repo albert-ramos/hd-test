@@ -32,17 +32,25 @@ npm run prod
 Go to your browser and visit
 http://localhost:8000
 
-
+Login
+```
+admin@example.com
+```
+```
+example
+```
 
 ## TO DO
 
 - Unit testing
 - Add color picker
+- Add frontend dotenv
 - Refactor session object.
 - **Use MongoDB not MySQL**
 - **Create register page**
 - Encrypt user data saved on local storage.
 - Handle status codes 401, 403, auto logout on session expired.
+
 
 
 ### BUGFIX
