@@ -18026,9 +18026,12 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "column" }, [
-          _vm.userDataAvailable ? _c("p", [_vm._v("add widget")]) : _vm._e()
-        ])
+        _c(
+          "div",
+          { staticClass: "column" },
+          [_vm.userDataAvailable ? _c("widget-add-item-button") : _vm._e()],
+          1
+        )
       ])
     ])
   ])
@@ -18249,10 +18252,14 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
                 cellHeight: 80,
                 verticalMargin: 10
             };
+        },
+        onWidgetCreated: function onWidgetCreated(data) {
+            this.widgets.push(data);
         }
     },
 
     mounted: function mounted() {
+        var self = this;
         if (typeof this.$redrawVueMasonry === 'function') {
             this.$redrawVueMasonry();
         }
@@ -18260,7 +18267,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         this.getWidgets();
         this.setGrid();
 
-        console.log(__WEBPACK_IMPORTED_MODULE_1_vue_masonry__["a" /* VueMasonryPlugin */]);
+        this.$root.$on('widgetCreated', function (data) {
+            self.onWidgetCreated(data);
+        });
     },
     created: function created() {}
 });
@@ -18414,16 +18423,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setListeners: function setListeners() {
             var self = this;
 
-            this.$root.$on('widgetCreated', function (data) {
-                self.onWidgetCreated(data);
-            });
-
             this.$root.$on('widgetUpdated', function (data) {
                 self.onWidgetUpdated(data);
             });
-        },
-        onWidgetCreated: function onWidgetCreated(data) {
-            this.setProperties(data);
         },
         onWidgetUpdated: function onWidgetUpdated(data) {
             // THAT'S NOT OK, TEMPORARY FIX
@@ -22035,6 +22037,8 @@ exports.push([module.i, "\n.widget-item {\n        border: 1px solid;\n}\n", ""]
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_utils__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__admin_components_WidgetAddItemButton__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__admin_components_WidgetAddItemButton___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__admin_components_WidgetAddItemButton__);
 //
 //
 //
@@ -22056,10 +22060,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
+    components: {
+        WidgetAddItemButton: __WEBPACK_IMPORTED_MODULE_1__admin_components_WidgetAddItemButton___default.a
+    },
+
     data: function data() {
         return {
             user: '',
@@ -22093,6 +22103,108 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.setUser();
     }
 });
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(106)
+/* template */
+var __vue_template__ = __webpack_require__(107)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/admin/components/WidgetAddItemButton.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0ccdd6e7", Component.options)
+  } else {
+    hotAPI.reload("data-v-0ccdd6e7", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 106 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    computed: {},
+
+    methods: {
+        openForm: function openForm() {
+            this.$root.$emit('openWidgetForm', {});
+        }
+    },
+
+    // TODO: Maybe some animation?
+    mounted: function mounted() {},
+    created: function created() {}
+});
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "widget-add-item" }, [
+      _c("button", { on: { click: _vm.openForm } }, [_vm._v("+ new")])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0ccdd6e7", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

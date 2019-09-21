@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="column">
-                    <p v-if="userDataAvailable">add widget</p>
+                    <widget-add-item-button v-if="userDataAvailable"></widget-add-item-button>  
                 </div>
             </div>
         </div>
@@ -21,8 +21,13 @@
 
 <script>
 import UtilsHelper from '../helpers/utils'
+import WidgetAddItemButton from '../admin/components/WidgetAddItemButton'
 
 export default {
+
+    components: {
+        WidgetAddItemButton
+    },
 
     data() {
         return {

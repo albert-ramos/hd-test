@@ -53,10 +53,15 @@
                     cellHeight: 80,
                     verticalMargin: 10
                 }
-            }
+            },
+
+            onWidgetCreated(data) {
+                this.widgets.push(data)
+            },
         },
 
         mounted() {
+            let self = this
             if (typeof this.$redrawVueMasonry === 'function') {
                     this.$redrawVueMasonry()
                 }
@@ -64,7 +69,9 @@
             this.getWidgets();
             this.setGrid();
 
-            console.log(VueMasonryPlugin);
+            this.$root.$on('widgetCreated', function(data) {
+                self.onWidgetCreated(data)
+            })
         },
 
         created() {

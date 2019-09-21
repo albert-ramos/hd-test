@@ -52,19 +52,11 @@
             setListeners() {
                 let self = this;
 
-                this.$root.$on('widgetCreated', function(data) {
-                    self.onWidgetCreated(data)
-                })
-
                 this.$root.$on('widgetUpdated', function(data) {
                     self.onWidgetUpdated(data)
                 })
             },
 
-
-            onWidgetCreated(data) {
-                this.setProperties(data)
-            },
 
             onWidgetUpdated(data) {
                 // THAT'S NOT OK, TEMPORARY FIX
