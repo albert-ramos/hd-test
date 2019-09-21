@@ -18372,6 +18372,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         templateClass: function templateClass() {
             return 'tpl__' + this.template;
+        },
+        backgroundColorStyle: function backgroundColorStyle() {
+            return 'background-color: ' + this.background_color;
         }
     },
 
@@ -18434,43 +18437,55 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "widget-item", class: _vm.templateClass }, [
-    _c("div", { staticClass: "widget-item-container" }, [
-      _c("div", { staticClass: "widget-item-content" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "column text-center" }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "widget-edit button widget-button widget-button-fullw",
-                on: { click: _vm.openForm }
-              },
-              [_vm._v("\n                        edit\n                    ")]
-            )
+  return _c(
+    "div",
+    {
+      staticClass: "widget-item",
+      class: _vm.templateClass,
+      style: _vm.backgroundColorStyle
+    },
+    [
+      _c("div", { staticClass: "widget-item-container" }, [
+        _c("div", { staticClass: "widget-item-content" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "column text-center" }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "widget-edit button widget-button widget-button-fullw",
+                  on: { click: _vm.openForm }
+                },
+                [_vm._v("\n                        edit\n                    ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "column text-center" }, [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "widget-remove button widget-button widget-button-remove widget-button-fullw",
+                  on: { click: _vm.postRemove }
+                },
+                [
+                  _vm._v(
+                    "\n                        remove\n                    "
+                  )
+                ]
+              )
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "column text-center" }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "widget-remove button widget-button widget-button-remove widget-button-fullw",
-                on: { click: _vm.postRemove }
-              },
-              [_vm._v("\n                        remove\n                    ")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "column title-container" }, [
-            _c("blockquote", [_vm._v(_vm._s(_vm.title))])
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "column title-container" }, [
+              _c("blockquote", [_vm._v(_vm._s(_vm.title))])
+            ])
           ])
         ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

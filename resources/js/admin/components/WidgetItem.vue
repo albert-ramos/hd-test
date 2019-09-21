@@ -1,5 +1,5 @@
 <template>
-    <div  class="widget-item" v-bind:class="templateClass">
+    <div  class="widget-item" v-bind:class="templateClass" v-bind:style="backgroundColorStyle">
         <div class="widget-item-container">
             
             <div class="widget-item-content">
@@ -64,6 +64,10 @@
             },
             templateClass() {
                 return `tpl__${this.template}`
+            },
+
+            backgroundColorStyle() {
+                return `background-color: ${this.background_color}`;
             }
         },
 
