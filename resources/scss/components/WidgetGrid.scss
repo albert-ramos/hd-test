@@ -1,0 +1,22 @@
+.widget-grid {
+    .widget-item {
+        margin: 5px;
+        
+        &.tpl{
+                &__small {
+                    width: 20%;
+                    height: 200px;
+                }
+                &__medium {
+                    width: 40%;
+                    height: 300px;
+                }
+                &__large {
+                    width: 50%;
+                    height: 350px;
+                }
+            }  
+    }
+}
+
+

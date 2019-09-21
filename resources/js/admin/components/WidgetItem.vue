@@ -1,7 +1,11 @@
 <template>
     <div>
-        <div class="widget-item">
-            <p @click="openForm">{{title}}</p>
+        <div class="widget-item-container">
+            
+            <div class="widget-item-content">
+                <p @click="openForm">{{title}}</p>
+            </div>
+
         </div>
     </div>
 </template>

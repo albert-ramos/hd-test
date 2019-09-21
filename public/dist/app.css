@@ -696,3 +696,22 @@ img {
   text-decoration: none;
   cursor: pointer;
 }
+
+.widget-grid .widget-item {
+  margin: 5px;
+}
+
+.widget-grid .widget-item.tpl__small {
+  width: 20%;
+  height: 200px;
+}
+
+.widget-grid .widget-item.tpl__medium {
+  width: 40%;
+  height: 300px;
+}
+
+.widget-grid .widget-item.tpl__large {
+  width: 50%;
+  height: 350px;
+}

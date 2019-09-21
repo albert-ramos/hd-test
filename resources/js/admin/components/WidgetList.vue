@@ -1,19 +1,35 @@
 <template>
-    <div id="widget-list">
+    <div id="widget-list" class="widget-grid"
+                    v-masonry
+                    transition-duration="0.3s" item-selector=".widget-item">
+
         <widget-item v-for="widget in widgets" 
                     v-bind:data="widget"
-                    v-bind:key="widget.id">></widget-item>
+                    v-bind:key="widget.id"
+                    class="widget-item"
+                    v-bind:class="`tpl__${widget.template}`"
+                    v-masonry-tile
+                    ></widget-item>
     </div>
 </template>
 
+<style>
+    .widget-item {
+            border: 1px solid;
+    }
+</style>
 <script>
-    import UtilsHelper from '../../helpers/utils'
-    import WidgetItem from './WidgetItem'
+    import Vue from 'vue'
+    import {VueMasonryPlugin} from 'vue-masonry';
+
+    Vue.use(VueMasonryPlugin)
     
+    import WidgetItem from './WidgetItem'
+    import UtilsHelper from '../../helpers/utils'
 
     export default {
         components: {
-            WidgetItem,
+            WidgetItem
         },
         
          data() {
@@ -31,10 +47,24 @@
                     this.widgets = data.data.widgets
                 });
             },
+
+            setGrid() {
+                let options = {
+                    cellHeight: 80,
+                    verticalMargin: 10
+                }
+            }
         },
 
         mounted() {
+            if (typeof this.$redrawVueMasonry === 'function') {
+                    this.$redrawVueMasonry()
+                }
+                
             this.getWidgets();
+            this.setGrid();
+
+            console.log(VueMasonryPlugin);
         },
 
         created() {
