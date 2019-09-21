@@ -16639,12 +16639,23 @@ var UtilsHelper = {
         checkUserIsLoggedIn: function checkUserIsLoggedIn() {
             return this.getLocalToken();
         },
+
+
+        // TODO: Encrypt values
         getLocalToken: function getLocalToken() {
             var authToken = localStorage.getItem('atkn');
             return authToken ? authToken : false;
         },
         setLocalToken: function setLocalToken(token) {
             localStorage.setItem('atkn', token);
+        },
+        setUserInfo: function setUserInfo(user) {
+            var userString = JSON.stringify(user);
+            localStorage.setItem('user', userString);
+        },
+        getUserInfo: function getUserInfo() {
+            var user = localStorage.getItem('user');
+            return user ? JSON.parse(user) : false;
         }
     },
 
@@ -17720,8 +17731,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (_ref) {
                 var data = _ref.data;
 
-                __WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* default */].session.setLocalToken(data.data.token);
+                var user = data.data.user;
+                var token = data.data.token;
+
+                // TODO: Refactor to proceed with one call setter
+                __WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* default */].session.setLocalToken(token);
+                __WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* default */].session.setUserInfo(user);
                 _this.$router.push({ name: 'AdminHome' });
+                _this.$root.$emit('loginSuccess', user);
             });
         }
     }
@@ -17948,7 +17965,7 @@ function toComment(sourceMap) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(104)
 /* template */
 var __vue_template__ = __webpack_require__(60)
 /* template functional */
@@ -17996,16 +18013,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("header", [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "column" }, [
+          _vm._v("\n                Lumen & Vue\n            ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "column" }, [
+          _vm.userDataAvailable
+            ? _c("p", [_vm._v("Hello " + _vm._s(_vm.user.name))])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "column" }, [
+          _vm.userDataAvailable ? _c("p", [_vm._v("add widget")]) : _vm._e()
+        ])
+      ])
+    ])
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("header", [_c("h1", [_vm._v("Lumen & Vue")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -21998,6 +22026,73 @@ exports.push([module.i, "\n.widget-item {\n        border: 1px solid;\n}\n", ""]
 
 // exports
 
+
+/***/ }),
+/* 103 */,
+/* 104 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_utils__ = __webpack_require__(26);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            user: '',
+            userDataReady: false
+        };
+    },
+
+
+    computed: {
+        userDataAvailable: function userDataAvailable() {
+            return this.userDataReady;
+        }
+    },
+
+    methods: {
+        setUser: function setUser() {
+            this.user = __WEBPACK_IMPORTED_MODULE_0__helpers_utils__["a" /* default */].session.getUserInfo();
+            this.userDataReady = true;
+        }
+    },
+
+    // TODO: User setters
+    mounted: function mounted() {
+        var self = this;
+        this.$root.$on('loginSuccess', function (user) {
+            self.user = user;
+            self.userDataReady = true;
+        });
+    },
+    created: function created() {
+        this.setUser();
+    }
+});
 
 /***/ })
 /******/ ]);

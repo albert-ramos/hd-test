@@ -4,6 +4,7 @@ const UtilsHelper = {
             return this.getLocalToken()
         },
 
+        // TODO: Encrypt values
         getLocalToken() {
             let authToken = localStorage.getItem('atkn')
             return (authToken) ? authToken : false
@@ -11,6 +12,16 @@ const UtilsHelper = {
 
         setLocalToken(token) {
             localStorage.setItem('atkn', token)
+        },
+
+        setUserInfo(user) {
+            let userString = JSON.stringify(user);
+            localStorage.setItem('user', userString)
+        },
+
+        getUserInfo() {
+            let user = localStorage.getItem('user')
+            return (user) ? JSON.parse(user) : false
         }
     },
 
