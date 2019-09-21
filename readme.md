@@ -1,21 +1,44 @@
-# Lumen PHP Framework
+# Lumen & vue
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+Login and dashboard example with JWT token and REST api.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## INSTALLATION
 
-## Official Documentation
+Download repository
+```git clone https://github.com/albert-ramos/hd-test.git```
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+Download dependencies
+```composer install && npm install```
 
-## Security Vulnerabilities
+Run migrations
+```php artisan migrate:refresh --seed```
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+Start server
+```php
+php -S localhost:8000 -t public
+```
 
-## License
+Build assets
+```npm run prod```
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Go to your browser and visit
+http://localhost:8000
+
+
+
+## TO DO
+
+- Unit testing
+- Add color picker
+- Refactor session object.
+- Use MongoDB not MySQL
+- Create register component
+- Encrypt user data saved on local storage.
+- Handle status codes 401, 403, auto logout on session expired.
+
+
+### BUGFIX
+- On dashboard, if you change the template from existing widget it may overlap to another widget.
+
+##### IMPROVEMENTS
+- Add some style animations & transitions
