@@ -48,6 +48,7 @@ example
 - Refactor session object.
 - **Use MongoDB not MySQL**
 - **Create register page**
+- Update gitignore with folder **public/**
 - Encrypt user data saved on local storage.
 - Handle status codes 401, 403, auto logout on session expired.
 
