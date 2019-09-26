@@ -14,6 +14,7 @@ Download dependencies
 cd hd-test && composer install && npm install
 ```
 
+Copy .env.example to .env
 Configure your DB settings to .env file
 
 ```
