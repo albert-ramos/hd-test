@@ -11,7 +11,7 @@ git clone https://github.com/albert-ramos/hd-test.git
 
 Download dependencies
 ```
-composer install && npm install
+cd hd-test && composer install && npm install
 ```
 
 Run migrations
