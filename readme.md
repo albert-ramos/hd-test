@@ -14,6 +14,17 @@ Download dependencies
 cd hd-test && composer install && npm install
 ```
 
+Configure your DB settings to .env file
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=hd_test
+DB_USERNAME=root
+DB_PASSWORD=secret
+```
+
 Run migrations
 ```
 php artisan migrate:refresh --seed
