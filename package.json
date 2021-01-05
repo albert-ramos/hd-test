@@ -14,7 +14,7 @@
     "laravel-mix": "^2.0"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "gridstack": "^0.4.0",
     "izimodal": "^1.5.1",
     "masonry-layout": "^4.2.2",
